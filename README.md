@@ -32,5 +32,10 @@ The result query will add some extra where clause based on ir_rule (Access Right
 ```
 SELECT "res_partner".id FROM "res_partner" WHERE (("res_partner"."active" = 'True')  AND  (("res_partner"."name"::text ilike '%agus%')  OR  (("res_partner"."street"::text ilike '%Street 2%')  AND  ("res_partner"."email"::text ilike '%gmail%')))) AND (((("res_partner"."partner_share" IS NULL or "res_partner"."partner_share" = false )  OR  ("res_partner"."company_id" in ('1')))  OR  "res_partner"."company_id" IS NULL )  AND  ((("res_partner"."type" != 'private') OR "res_partner"."type" IS NULL)  OR  "res_partner"."type" IS NULL ))
 ```
+If you want to ignore model being active or not, you can pass **active_test** context like this
+
+```
+query = self.env['res.partner'].with_context({'active_test': False}).get_query(domain)
+```
 
 Visit my website [to get Odoo tutorial tips and tricks](https://ngasturi.id)
